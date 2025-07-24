@@ -1,4 +1,4 @@
-import unittest  # นำเข้า module unittest สำหรับการทดสอบ
+import unittest  # นำเข้า module unittest สำหรับการทดสอบ   
 from formatter import format_string  # นำเข้าฟังก์ชัน format_string จากไฟล์ formatter.py
 
 class TestStringFormatter(unittest.TestCase):  # สร้างคลาสทดสอบที่สืบทอดจาก unittest.TestCase
