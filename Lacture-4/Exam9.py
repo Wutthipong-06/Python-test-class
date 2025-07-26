@@ -2,9 +2,8 @@ keep_going = 'y'
 
 while keep_going == 'y':
     sales = float(input('Enter the sales amount: '))
-    com_rate = float(input('Enter the commission rate (as a decimal): '))
-    commission = sales * com_rate
-    print(f'The commission is: ${commission:.2f}')
+    com_rate = sales * 2.5
+    print(f'The commission is: ${com_rate:.2f}')
     keep_going = input('Do you want to calculate another commission? (y/n): ')
     
     if keep_going.lower() != 'y':
