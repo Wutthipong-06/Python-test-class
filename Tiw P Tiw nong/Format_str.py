@@ -8,4 +8,4 @@ for char in test:
         print(f"Vowel found: {char}")
         print(f"Total vowels found: {count}")
     else:
-        print()
+        print(f"Character not a vowel: {count}")
