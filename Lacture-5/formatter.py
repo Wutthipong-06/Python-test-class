@@ -20,6 +20,6 @@ def format_string(text, format_type="upper"):
 #     ]
 #     for text, fmt_type in test_strings:  
 #         result = format_string(text, fmt_type)  
-#         print(f"Output: {result}")  
+#         print(f"{result}")  
 # if __name__ == "__main__":  
 #     main()  
