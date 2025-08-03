@@ -1,3 +1,9 @@
-for i in range(2, 13):
-    for j in range(1, 13):  
-        print("%s x %s = %s" % (i, j, i * j))
+n = input()
+s = ''
+for i in n:
+    s.append(n)
+    for j in s:
+        if s not in n:
+            print('False')
+        else:
+            print("true")
