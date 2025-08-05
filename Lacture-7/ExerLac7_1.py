@@ -1,18 +1,36 @@
 survey_results = [
-    ["Python", "Javascript", "C++"],
-    ["Python", "Javascript", "C#"],
-    ["Python", "Java"],
-    ["Python","C++","Javascript"],
+    ["Python", "Javascript", "C++"], #0
+    ["Python", "Javascript", "C#"],  #1
+    ["Python", "Java"], #2 
+    ["Python","C++","Javascript"], #3
+    ["Python","Javascript","C++","Java"] #4
 ]
-all_partici = [set(i) for i in survey_results] #แปลงจาก list ให้เป็น list of set
-partici = set.intersection(*all_partici)
-print("chose by all partici",partici)
 
-one_partici = set
+choices_sets = [set(p) for p in survey_results]
+common_languages = set.intersection(*choices_sets)
+print(f'Languages use all partici: {common_languages}')
 
+languages = {}
+for i in choices_sets:
+    for lang in i:
+        languages[lang] = languages.get(lang, 0) + 1
+only_one_languages = {lang for lang, count in languages.items() if count == 1}
+print(f'Languages only chosen by one participant: {only_one_languages}')
 
-#Output {'python} pass
-#Output {'C#'}
-#Output 5
-#Output {'Java'}
-#Output [[1,4]]
+num_of_uniq = len(languages)
+print(f'Number of unique languages: {num_of_uniq}')
+
+only_one_languages = {lang for lang, count in languages.items() if count == 2}
+print(f'Languages chosen by exactly two participant: {only_one_languages}')
+
+language = {}
+
+for i, langs in enumerate(survey_results, 1): 
+    key = frozenset(langs)  # ใช้ frozenset เพื่อไม่สนลำดับ
+    if key in language:
+        language[key].append(i)
+    else:
+        language[key] = [i]
+
+duplicate_indices = [indices for indices in language.values() if len(indices) > 1]
+print(duplicate_indices)

@@ -13,6 +13,10 @@ print(attendance_sets)
 present_every_day = set.intersection(*attendance_sets)
 print("Present every day:", present_every_day)
 
+#find EVE in attention_week
+
+
+
 all_students = set.union(*attendance_sets)
 absent_at_least_one_day = all_students - present_every_day
 print("Absent at least one day:", absent_at_least_one_day)
