@@ -11,4 +11,4 @@ def tosses_coin():
         else:
             print('Tails')
 
-tosses_coin()            
+tosses_coin() 
