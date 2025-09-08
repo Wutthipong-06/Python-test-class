@@ -1,0 +1,57 @@
+    # ใช้ dictionary ธรรมดาแทน defaultdict
+    action_counts = {}  
+    user_sessions = {}  
+    users = set()  # เก็บ user_id ที่ไม่ซ้ำกัน
+    session_times = {}  # เก็บเวลา session ของแต่ละผู้ใช้
+    try:
+        with open(log_file_path, "r") as log_file:
+            for line in log_file:
+                # แยกข้อมูลแต่ละบรรทัด
+                parts = line.strip().split()
+                if len(parts) == 4:
+                    timestamp, user_id, action, duration = parts
+                    try:
+                        duration = int(duration)  # แปลง duration เป็นตัวเลข
+                    except ValueError:
+                        continue  # ถ้า duration ไม่สามารถแปลงได้ ให้ข้ามบรรทัดนี้
+
+                    # นับจำนวน action ที่เกิดขึ้น
+                    if action not in action_counts:
+                        action_counts[action] = 1
+                    else:
+                        action_counts[action] += 1
+                    
+                    # เก็บข้อมูลเวลาของเซสชัน
+                    if action == "login":
+                        # เริ่มต้น session ของผู้ใช้
+                        if user_id not in user_sessions:
+                            user_sessions[user_id] = [duration]
+                        else:
+                            user_sessions[user_id].append(duration)
+                    elif action == "logout":
+                        # คำนวณเวลารวมของเซสชันในขณะที่ logout
+                        if user_id in user_sessions:
+                            user_sessions[user_id].append(duration)
+
+                    # เพิ่ม user_id ลงใน set ของผู้ใช้
+                    users.add(user_id)
+
+    except FileNotFoundError:
+        print(f"Error: The file {log_file_path} does not exist.")
+        return {}
+
+    # คำนวณค่าที่ต้องการ
+    total_users = len(users)
+    most_active_user = max(user_sessions)
+    total_duration = sum(sum(sessions) for sessions in user_sessions.values())
+    average_session_time = total_duration / total_users if total_users > 0 else 0
+
+    # สร้างผลลัพธ์ในรูปแบบที่ต้องการ
+    result = {
+        "total_users": total_users,
+        "action_counts": action_counts,
+        "most_active_user": most_active_user,
+        "average_session_time": average_session_time
+    }
+    
+    return result
