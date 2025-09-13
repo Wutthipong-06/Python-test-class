@@ -4,5 +4,5 @@ matrix = [
     [7, 8, 9]
 ]
 
-matrix[0][1] = 10
+matrix[0][1] = 12
 print(matrix)
